@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SV Electronics</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>&nbsp;&nbsp; SV Electronics.in</h1>
+        <ul class="nav-links">
+            <li><a href="index.html">Sign In</a></li>
+        </ul>
+        <div class="menu-btn">&#9776;</div>
+    </nav>
+
+    <div class="container">
+        <!-- Left Side (Video) -->
+        <div class="left">
+            <video autoplay loop muted class="background-video">
+                <source src="video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="right">
+            <div class="register-box">
+                <h1>Create an Account</h1>
+                    <input type="text" id="name" placeholder="Full Name" required>
+                    <input type="tel" id="number" placeholder="Phone Number" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <input type="password" id="confirm" placeholder="Confirm Password" required>
+                    <button id="btn">Register</button>
+                    <div class="signin">
+                        <p>Already have an account? <a href="index.html">Sign in</a></p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&nbsp;&nbsp; &copy; 2025 SV Electronics. All rights reserved.</p>
+        <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact</a></li>
+            &nbsp;&nbsp;
+        </ul>
+    </footer>
+    <script src="register.js"></script>
+</body>
+</html>
