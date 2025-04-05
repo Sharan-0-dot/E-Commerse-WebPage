@@ -13,22 +13,27 @@ btn.addEventListener("click", async () => {
     }
 
     const URL = `http://localhost:8080/User/${id}`;
-    const response = await fetch(URL, {
-        method : "GET",
-        headers : {
-            "Content-Type": "application/json"
+    try {
+        const response = await fetch(URL, {
+            method : "GET",
+            headers : {
+                "Content-Type": "application/json"
+            }
+        });
+        if(!response.ok) {
+            alert("User Doesn't Exist, Register First OR Internal Server Error");
+            return;
         }
-    });
-    if(!response.ok) {
-        alert("User Doesn't Exist, Register First OR Internal Server Error");
-        return;
-    }
-    const data = await response.json();
-    if(pass == data.password) {
-        localStorage.setItem("LogedInUser", JSON.stringify(data));
-        window.location.href = "Home.html";
-    } else {
-        alert("Password Incorrect");
+        const data = await response.json();
+        if(pass == data.password) {
+            localStorage.setItem("LogedInUser", JSON.stringify(data));
+            window.location.href = "Home.html";
+        } else {
+            alert("Password Incorrect");
+        }
+    } catch(error) {
+        console.log(error);
+        alert("The Server is not running try after some time");
     }
 });
 
