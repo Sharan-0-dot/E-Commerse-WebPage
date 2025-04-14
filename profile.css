@@ -95,13 +95,6 @@ body {
   background-color: #001d2a;
 }
 
-#tableHead {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  color: var(--dark-blue);
-}
-
 .orders {
   display: flex;
   flex-direction: row;
@@ -110,6 +103,7 @@ body {
 }
 
 .view {
+  margin-top: 15px;
   height: 5vh;
   width: 5vw;
   border-radius: 3px;

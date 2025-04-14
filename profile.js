@@ -15,7 +15,65 @@ document.addEventListener("DOMContentLoaded", async () => {
   userName.innerHTML = `Name : ${user.userName}`;
   userEmail.innerHTML = `<strong>Email:</strong> ${user.email}`;
   userPhone.innerHTML = `<strong>Phone:</strong> +91 ${user.contact}`;
+
+  await findRecentOrders(user.userId);
 });
+
+const findRecentOrders = async (userId) => {
+  const URL = `http://localhost:8080/User/Orders/${userId}`;
+  try {
+    const response = await fetch(URL);
+    if(!response.ok) {
+      console.log("Could not fetch the details");
+      return;
+    }
+    const orderData = await response.json();
+
+    const container = document.getElementById('OrdersContainer'); // Make sure this div exists in your HTML
+    container.innerHTML = ''; // Optional: clear previous content
+
+    orderData.forEach(order => {
+      const orderDiv = document.createElement('div');
+      orderDiv.className = 'orders';
+
+      const id = document.createElement('h5');
+      id.textContent = `Order-ID : ${order.orderId}`;
+
+      const time = document.createElement('h5');
+      time.textContent = `Time : ${formatOrderTime(order.time)}`;
+
+      const price = document.createElement('h5');
+      price.textContent = `Price : ₹${order.totalPrice}`;
+
+      const viewBtn = document.createElement('button');
+      viewBtn.className = 'view';
+      viewBtn.textContent = 'view';
+
+      orderDiv.appendChild(id);
+      orderDiv.appendChild(price);
+      orderDiv.appendChild(time);
+      orderDiv.appendChild(viewBtn);
+
+      container.appendChild(orderDiv);
+    });
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+function formatOrderTime(isoString) {
+  const date = new Date(isoString);
+
+  // Format: DD/MM/YYYY HH:MM
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const year = date.getFullYear();
+
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  return `${day}/${month}/${year}  ${hours}:${minutes}`;
+}
 
 // Logout button
 function logoutUser() {
