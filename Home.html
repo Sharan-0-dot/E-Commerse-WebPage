@@ -1,15 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SV Electronics - Home</title>
+  <link rel="stylesheet" href="home.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Welcome</h1>
-    <h2 id="id"></h2>
-    <h2 id="name"></h2>
-    <h2 id="email"></h2>
-    <script src="home.js"></script>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <h1>SV Electronics.in</h1>
+    </div>
+    <div class="nav-center">
+      <label for="category">
+        <select class="category" id="category">
+          <option>🔍</option>
+        </select>
+      </label>
+      <input type="text" placeholder="Search SV Electronics" />
+      <i class="fa fa-search"></i>
+    </div>
+    <ul class="nav-links">
+      <li><a href="home.html">🏠 Home</a> </li>
+      <li><a href="cart.html">🛒 Cart</a></li>
+      <li><a href="help.html">❓ Help</a></li>
+    </ul>
+    <div class="user-info">
+      <span id="user-id"></span><br>
+      <span id="user-Name"></span>
+      <a href="profile.html" class="profile-link-circle">
+        <button><img src="profile.png" alt="Profile" /></button>
+      </a>
+    </div>
+    <div class="menu-btn">&#9776;</div>
+  </nav>
+
+  <!-- Hero Section -->
+<header class="hero">
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="video1.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="hero-content">
+    <h1>Welcome to SV Electronics</h1>
+    <p>Find the best deals on top-quality electronics.</p>
+    <a href="#" class="btn">Shop Now</a>
+  </div>
+</header>
+
+  <!-- Product Section -->
+  <section class="product-section">
+    <div class="product-grid" id="productGrid">
+      <!-- Products will be injected here via JS -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-section">
+        <h4>Get to Know Us</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Releases</a></li>
+          <li><a href="#">Science</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect with Us</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Make Money with Us</h4>
+        <ul>
+          <li><a href="#">Sell on Platform</a></li>
+          <li><a href="#">Become an Affiliate</a></li>
+          <li><a href="#">Advertise Products</a></li>
+          <li><a href="#">Supply Chain</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Let Us Help You</h4>
+        <ul>
+          <li><a href="#">Your Account</a></li>
+          <li><a href="#">Returns Centre</a></li>
+          <li><a href="#">100% Protection</a></li>
+          <li><a href="#">App Download</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <ul>
+        <li><a href="#">Electronics</a></li>
+        <li><a href="#">SV Electronics Web Services</a></li>
+        <li><a href="#">Audible</a></li>
+        <li><a href="#">Shopbop</a></li>
+        <li><a href="#">SV Electronics Business</a></li>
+        <li><a href="#">Shop Now</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="home.js"></script>
 </body>
 </html>

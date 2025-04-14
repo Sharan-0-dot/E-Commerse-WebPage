@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="profile-container">
+    <div class="profile-header">
+      <img src="profile.jpeg" alt="User Photo" class="profile-photo">
+      <h2 id="user-Name">Vardhan Reddy</h2>
+      <p id="user-id">User ID: 123456789</p>
+    </div>
+
+    <div class="profile-section">
+      <h3><i class="fas fa-user-circle"></i> Personal Information</h3>
+      <ul>
+        <li id="userEmail"><strong>Email:</strong> vardhan@example.com</li>
+        <li id="userPhone"><strong>Phone:</strong> +91 9876543210</li>
+        <li><strong>Member Since:</strong> May 2025</li>
+      </ul>
+    </div>
+
+    <div class="profile-section">
+      <h3><i class="fas fa-box"></i> Recent Orders</h3>
+      <div id="tableHead">
+        <h4>Order ID</h4>
+        <h4>Time</h4>
+        <h4>Total Price</h4>
+        <h4>Details</h4>
+      </div>
+      <div class="orders">
+        <h5>--</h5>
+        <h5>--</h5>
+        <h5>--</h5>
+        <button class="view">view</button>
+      </div>
+    </div>
+
+    <div class="profile-section" id="logout">
+      <button class="btn danger">Logout</button>
+    </div>
+  </div>
+
+  <script src="profile.js"></script>
+</body>
+</html>

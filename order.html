@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --blue: #2097c3;
+      --dark-blue: #00344d;
+      --light: #f9f9f9;
+      --orange: #ff7b00;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--light);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--dark-blue);
+      font-size: 28px;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .order-summary {
+      margin-top: 30px;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 15px;
+      text-align: right;
+      color: var(--orange);
+    }
+
+    button {
+      background-color: var(--blue);
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 25px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: var(--dark-blue);
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      input, textarea {
+        padding: 10px;
+        font-size: 15px;
+      }
+
+      .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .order-item span {
+        margin-bottom: 4px;
+      }
+
+      .total {
+        font-size: 18px;
+        text-align: left;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 12px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Confirm Your Order</h1>
+    <form id="order-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="address">Address:</label>
+      <textarea id="address" rows="3" required></textarea>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" required />
+
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div id="summary-items"></div>
+        <p class="total">Total: ₹<span id="order-total">0</span></p>
+      </div>
+
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const orderProduct = JSON.parse(localStorage.getItem("orderProduct"));
+      const summaryContainer = document.getElementById("summary-items");
+      const totalDisplay = document.getElementById("order-total");
+      let total = 0;
+
+      if (cart.length === 0 && !orderProduct) {
+        summaryContainer.innerHTML = "<p>Your cart is empty.</p>";
+        totalDisplay.textContent = "0";
+      } else {
+        if (orderProduct) {
+          const div = document.createElement("div");
+          div.className = "order-item";
+          div.innerHTML = `
+            <span>${orderProduct.name}</span>
+            <span>${orderProduct.price}</span>
+          `;
+          summaryContainer.appendChild(div);
+
+          const price = parseInt(orderProduct.price.replace(/[^\d]/g, ""));
+          total += price;
+        }
+
+        cart.forEach((item) => {
+          const div = document.createElement("div");
+          div.className = "order-item";
+          div.innerHTML = `
+            <span>${item.name}</span>
+            <span>${item.price}</span>
+          `;
+          summaryContainer.appendChild(div);
+
+          const price = parseInt(item.price.replace(/[^\d]/g, ""));
+          total += price;
+        });
+
+        totalDisplay.textContent = total.toLocaleString();
+      }
+
+      document.getElementById("order-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+
+        if (total === 0) {
+          alert("Your cart is empty!");
+          return;
+        }
+
+        const newOrder = {
+          id: "ORD" + Date.now(),
+          customer: { name, address, phone },
+          products: [],
+          total: "₹" + total.toLocaleString(),
+          placedAt: new Date().toLocaleString()
+        };
+
+        if (orderProduct) {
+          newOrder.products.push(orderProduct);
+          localStorage.removeItem("orderProduct");
+        }
+
+        if (cart.length > 0) {
+          newOrder.products = newOrder.products.concat(cart);
+          localStorage.removeItem("cart");
+        }
+
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.push(newOrder);
+        localStorage.setItem("orders", JSON.stringify(orders));
+        localStorage.setItem("lastOrder", JSON.stringify(newOrder));
+
+        alert(`Thank you, ${name}! Your order has been placed.`);
+        window.location.href = "orderplaced.html";
+      });
+    });
+  </script>
+</body>
+</html>
