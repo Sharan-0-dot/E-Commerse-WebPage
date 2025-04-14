@@ -29,8 +29,8 @@ const findRecentOrders = async (userId) => {
     }
     const orderData = await response.json();
 
-    const container = document.getElementById('OrdersContainer'); // Make sure this div exists in your HTML
-    container.innerHTML = ''; // Optional: clear previous content
+    const container = document.getElementById('OrdersContainer');
+    container.innerHTML = '';
 
     orderData.forEach(order => {
       const orderDiv = document.createElement('div');
@@ -66,7 +66,7 @@ function formatOrderTime(isoString) {
 
   // Format: DD/MM/YYYY HH:MM
   const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const month = String(date.getMonth() + 1).padStart(2, '0'); 
   const year = date.getFullYear();
 
   const hours = String(date.getHours()).padStart(2, '0');
@@ -78,8 +78,8 @@ function formatOrderTime(isoString) {
 // Logout button
 function logoutUser() {
   if (confirm("Are you sure you want to log out?")) {
-    localStorage.removeItem("currentUser"); // Clear user data from localStorage on logout
+    localStorage.removeItem("currentUser"); 
     alert("Logged out successfully.");
-    window.location.href = 'login.html'; // Redirect to login page
+    window.location.href = 'login.html'; 
   }
 }
