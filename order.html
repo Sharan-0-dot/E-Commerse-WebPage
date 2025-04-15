@@ -156,85 +156,86 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+      const userData = localStorage.getItem("LogedInUser");
+      const user = JSON.parse(userData);
+      const userId = user.userId;
+
+      console.log(userData);
+      console.log(localStorage.getItem("cart"));
+
+    function loadOrderSummary() {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const orderProduct = JSON.parse(localStorage.getItem("orderProduct"));
       const summaryContainer = document.getElementById("summary-items");
-      const totalDisplay = document.getElementById("order-total");
+      const totalSpan = document.getElementById("order-total");
+  
       let total = 0;
-
-      if (cart.length === 0 && !orderProduct) {
-        summaryContainer.innerHTML = "<p>Your cart is empty.</p>";
-        totalDisplay.textContent = "0";
-      } else {
-        if (orderProduct) {
-          const div = document.createElement("div");
-          div.className = "order-item";
-          div.innerHTML = `
-            <span>${orderProduct.name}</span>
-            <span>${orderProduct.price}</span>
-          `;
-          summaryContainer.appendChild(div);
-
-          const price = parseInt(orderProduct.price.replace(/[^\d]/g, ""));
-          total += price;
-        }
-
-        cart.forEach((item) => {
-          const div = document.createElement("div");
-          div.className = "order-item";
-          div.innerHTML = `
-            <span>${item.name}</span>
-            <span>${item.price}</span>
-          `;
-          summaryContainer.appendChild(div);
-
-          const price = parseInt(item.price.replace(/[^\d]/g, ""));
-          total += price;
-        });
-
-        totalDisplay.textContent = total.toLocaleString();
-      }
-
-      document.getElementById("order-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const name = document.getElementById("name").value.trim();
-        const address = document.getElementById("address").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-
-        if (total === 0) {
-          alert("Your cart is empty!");
-          return;
-        }
-
-        const newOrder = {
-          id: "ORD" + Date.now(),
-          customer: { name, address, phone },
-          products: [],
-          total: "₹" + total.toLocaleString(),
-          placedAt: new Date().toLocaleString()
-        };
-
-        if (orderProduct) {
-          newOrder.products.push(orderProduct);
-          localStorage.removeItem("orderProduct");
-        }
-
-        if (cart.length > 0) {
-          newOrder.products = newOrder.products.concat(cart);
-          localStorage.removeItem("cart");
-        }
-
-        const orders = JSON.parse(localStorage.getItem("orders")) || [];
-        orders.push(newOrder);
-        localStorage.setItem("orders", JSON.stringify(orders));
-        localStorage.setItem("lastOrder", JSON.stringify(newOrder));
-
-        alert(`Thank you, ${name}! Your order has been placed.`);
-        window.location.href = "orderplaced.html";
+      summaryContainer.innerHTML = "";
+  
+      cart.forEach(item => {
+        const price = parseFloat(item.price.replace(/[^\d.]/g, "")) || 0;
+        const quantity = item.quantity || 1;
+        total += price * quantity;
+  
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("order-item");
+        itemDiv.innerHTML = `
+          <span><strong>${item.name}</strong></span>
+          <span>₹${price.toFixed(2)} × ${quantity}</span>
+        `;
+        summaryContainer.appendChild(itemDiv);
       });
+  
+      totalSpan.textContent = total.toFixed(2);
+    }
+  
+    // Form submission
+    document.getElementById("order-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+  
+      const name = document.getElementById("name").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+      if (!name || !address || !phone || cart.length === 0) {
+        alert("Please fill out all fields and ensure your cart has items.");
+        return;
+      }
+  
+      const payload = {
+        userId: userId,
+        cart: cart.map(item => ({
+          productId: item.id,
+          quantity: item.quantity || 1
+        }))
+      };
+  
+      try {
+        const res = await fetch("http://localhost:8080/Order/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+  
+        if (res.ok) {
+          const result = await res.json();
+          alert("Order placed successfully!");
+          localStorage.removeItem("cart");
+          window.location.href = "orderplaced.html";
+        } else {
+          alert("Failed to place order. Please try again.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error occurred.");
+      }
     });
+  
+    // Load summary on page load
+    document.addEventListener("DOMContentLoaded", loadOrderSummary);
   </script>
+  
 </body>
 </html>
