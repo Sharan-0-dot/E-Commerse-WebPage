@@ -160,9 +160,6 @@
       const user = JSON.parse(userData);
       const userId = user.userId;
 
-      console.log(userData);
-      console.log(localStorage.getItem("cart"));
-
     function loadOrderSummary() {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
       const summaryContainer = document.getElementById("summary-items");
@@ -205,7 +202,7 @@
       const payload = {
         userId: userId,
         cart: cart.map(item => ({
-          productId: item.id,
+          productId: item.productId,
           quantity: item.quantity || 1
         }))
       };

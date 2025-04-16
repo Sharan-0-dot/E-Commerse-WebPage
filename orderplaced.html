@@ -3,32 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Order Placed</title>
     <style>
-        .photo {
-    width: 500px;
-    height: 500px;
-    border-radius: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: darkblue;
-}
-
-
-        .photo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            text-align: center;
-            padding: 100px;
-            background-color: #f0f0f0;
-            font-family: sans-serif;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: #333;
         }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideIn 1s ease-out forwards;
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        .container h1 {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-weight: bold;
+            animation: slideIn 1.5s ease-out;
+        }
+
+        .photo {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            object-fit: contain;
+            animation: zoomIn 1s ease-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+        .photo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            color: #555;
+            opacity: 0;
+            animation: fadeInMessage 1.5s ease-out forwards;
+        }
+
+        .btn {
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #218838;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInMessage {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
     </style>
 </head>
 <body>
-    <img src="orderplaced.webp" alt="My Photo" width="300" height="300">
+
+    <div class="container">
+        <h1>Order Placed Successfully!</h1>
+        <img src="orderplaced.webp" alt="Order Placed" class="photo">
+        <div class="message">
+            Thank you for your purchase! Your order is being processed and will be delivered soon.
+        </div>
+        <button class="btn" onclick="window.location.href='home.html'">Go to Homepage</button>
+    </div>
+
 </body>
 </html>

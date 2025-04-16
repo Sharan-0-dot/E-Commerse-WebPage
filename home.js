@@ -23,9 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const productElement = button.closest(".product");
 
-        const productId = productElement.getAttribute("data-id");
-
-
+        const productId = productElement.querySelector(".product-id").dataset.id;
         const name = productElement.querySelector("h3").innerText;
         const brandCategory = productElement.querySelector("p").innerText;
         const description = productElement.querySelectorAll("p")[1]?.innerText || "";
@@ -33,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const image = productElement.querySelector("img").src;
 
         const product = {
-          id,
+          productId,
           name,
           description: brandCategory + " - " + description,
           price,
@@ -44,7 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
-
         alert(`${name} added to cart!`);
       });
     });
@@ -66,19 +63,18 @@ const addProducts = async () => {
       const productElement = document.createElement("div");
       productElement.className = "product";
 
-      productElement.setAttribute("data-id", product.productId);
-
       productElement.innerHTML = `
-        <div class="image-container">
-        <img src="${product.imageURL}" alt="${product.productName}" />
-        </div>
-        <h3>${product.productName}</h3>
-        <p>${product.brand} - ${product.category}</p>
-        <p>${product.description}</p>
-        <div class="price">₹${product.price}</div>
-        <a href="#" class="btn">Add to Cart</a>
-        `;
-      productGrid.appendChild(productElement);
+          <div class="image-container">
+            <img src="${product.imageURL}" alt="${product.productName}" />
+          </div>
+          <h3>${product.productName}</h3>
+          <p class="product-id" data-id="${product.productId}">ID: ${product.productId}</p>
+          <p>${product.brand} - ${product.category}</p>
+          <p>${product.description}</p>
+          <div class="price">₹${product.price}</div>
+          <a href="#" class="btn">Add to Cart</a>
+          `;
+          productGrid.appendChild(productElement);
     });
 
   } catch (error) {

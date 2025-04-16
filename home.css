@@ -281,7 +281,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 350px; /* Fixed height for consistent layout */
+    height: 370px; /* slightly increased for ID */
     text-align: center;
 }
 
@@ -303,9 +303,15 @@ body {
 
 .product h3 {
     font-size: 18px;
-    margin: 8px 0;
+    margin: 8px 0 4px;
     height: 40px;
     overflow: hidden;
+}
+
+.product .product-id {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 4px;
 }
 
 .product p {

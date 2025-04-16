@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   userEmail.innerHTML = `<strong>Email:</strong> ${user.email}`;
   userPhone.innerHTML = `<strong>Phone:</strong> +91 ${user.contact}`;
 
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", logoutUser);
+  }
+
   await findRecentOrders(user.userId);
 });
 
@@ -48,6 +54,10 @@ const findRecentOrders = async (userId) => {
       const viewBtn = document.createElement('button');
       viewBtn.className = 'view';
       viewBtn.textContent = 'view';
+      viewBtn.addEventListener('click', () => {
+        localStorage.setItem('selectedOrderId', order.orderId);
+        window.location.href = 'IndividualOrders.html';
+      });
 
       orderDiv.appendChild(id);
       orderDiv.appendChild(price);
@@ -78,8 +88,7 @@ function formatOrderTime(isoString) {
 // Logout button
 function logoutUser() {
   if (confirm("Are you sure you want to log out?")) {
-    localStorage.removeItem("currentUser"); 
-    alert("Logged out successfully.");
-    window.location.href = 'login.html'; 
+    localStorage.removeItem("LogedInUser");
+    window.location.href = 'index.html';
   }
 }
