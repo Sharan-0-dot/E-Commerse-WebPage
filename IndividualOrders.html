@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Details</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Details</title>
+  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <h1></h1>
+
+  <div class="profile-container">
+    <div class="profile-header">
+      <h2 id="order-title">Order Details</h2>
+      <p id="order-id">Order ID: Loading...</p>
+      <p id="order-date">Date: Loading...</p>
+      <p id="order-total">Total: Loading...</p>
+    </div>
+
+    <div class="profile-section">
+      <h3><i class="fas fa-box-open"></i> Products Ordered</h3>
+      <div id="itemsContainer" class="items-container">
+        <!-- Items will be populated here -->
+      </div>
+    </div>
+
+    <div class="profile-section" id="back-to-orders">
+      <button id="backBtn" class="btn danger">Back to Orders</button>
+    </div>
+  </div>
+
+  <script src="IndividualOrders.js"></script>
 </body>
-<script>
-    const text = document.querySelector("h1");
-    const orderId = localStorage.getItem('selectedOrderId');
-    text.innerText = orderId;
-</script>
 </html>

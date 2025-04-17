@@ -460,3 +460,20 @@ body {
     color: var(--yellow);
   }
   
+
+  #searchButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #555; /* or your preferred color */
+  }
+  
+  #searchButton:hover {
+    color: var(--orange); /* or your hover color */
+  }
+  
+  /* Remove default button styles */
+  #searchButton:focus {
+    outline: none;
+  }
