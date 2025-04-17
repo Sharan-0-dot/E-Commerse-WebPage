@@ -466,14 +466,30 @@ body {
     border: none;
     cursor: pointer;
     padding: 8px;
-    color: #555; /* or your preferred color */
+    color: white; 
   }
   
   #searchButton:hover {
-    color: var(--orange); /* or your hover color */
+    color: var(--orange); 
   }
   
-  /* Remove default button styles */
+  
+  #searchButton:focus {
+    outline: none;
+  }
+
+  #searchButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: white; 
+  }
+  
+  #searchButton:hover {
+    color: var(--orange); 
+  }
+
   #searchButton:focus {
     outline: none;
   }
