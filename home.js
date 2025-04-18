@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 const loadProducts = async (searchTerm = "") => {
     try {
       const url = searchTerm 
-        ? `https://ecommerce-springboot-c4eo.onrender.com/Product/Search/${encodeURIComponent(searchTerm)}`
-        : "https://ecommerce-springboot-c4eo.onrender.com/Product/";
+        ? `https://ecommerce-springboot-yevz.onrender.com/Product/Search/${encodeURIComponent(searchTerm)}`
+        : "https://ecommerce-springboot-yevz.onrender.com/Product/";
   
       const response = await fetch(url, {
         mode: 'cors', // Explicitly request CORS mode

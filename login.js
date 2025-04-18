@@ -12,7 +12,7 @@ btn.addEventListener("click", async () => {
         return;
     }
 
-    const URL = `https://ecommerce-springboot-c4eo.onrender.com/User/${id}`;
+    const URL = `https://ecommerce-springboot-yevz.onrender.com/User/${id}`;
     try {
         const response = await fetch(URL, {
             method : "GET",

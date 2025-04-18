@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   
   const fetchOrderItems = async (orderId) => {
-    const URL = `https://ecommerce-springboot-c4eo.onrender.com/User/Orders/items/${orderId}`;
+    const URL = `https://ecommerce-springboot-yevz.onrender.com/User/Orders/items/${orderId}`;
     
     try {
       const response = await fetch(URL);
