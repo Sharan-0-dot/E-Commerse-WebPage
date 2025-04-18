@@ -65,7 +65,7 @@ const renderProducts = (products) => {
       <p class="product-id" data-id="${product.productId}">ID: ${product.productId}</p>
       <p>${product.brand} - ${product.category}</p>
       <p>${product.description}</p>
-      <div class="price">₹${product.price}</div>
+      <div class="price">$${product.price}</div>
       <a href="#" class="btn">Add to Cart</a>
     `;
     productGrid.appendChild(productElement);
