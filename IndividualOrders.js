@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const order = items[0].order;
       document.getElementById("order-id").textContent = `Order ID: ${order.orderId}`;
       document.getElementById("order-date").textContent = `Date: ${formatOrderTime(order.time)}`;
-      document.getElementById("order-total").textContent = `Total: ₹${order.totalPrice.toFixed(2)}`;
+      document.getElementById("order-total").textContent = `Total: $${order.totalPrice.toFixed(2)}`;
   
       // Display items
       const container = document.getElementById('itemsContainer');
