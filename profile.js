@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 const findRecentOrders = async (userId) => {
-  const URL = `http://localhost:8080/User/Orders/${userId}`;
+  const URL = `https://ecommerce-springboot-c4eo.onrender.com/User/Orders/${userId}`;
   try {
     const response = await fetch(URL);
     if(!response.ok) {

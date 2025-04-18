@@ -28,7 +28,7 @@ btn.addEventListener("click", async () => {
         email: Email
     }
 
-    const URL = "http://localhost:8080/User/";
+    const URL = "https://ecommerce-springboot-c4eo.onrender.com/User/";
     const response = await fetch(URL, {
         method : "POST",
         headers : {
