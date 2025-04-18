@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="item-details">
             <h4 class="item-name">${item.product.productName}</h4>
             <p class="item-brand">Brand: ${item.product.brand}</p>
-            <p class="item-price">Price: ₹${item.price.toFixed(2)}</p>
+            <p class="item-price">Price: $${item.price.toFixed(2)}</p>
             <p class="item-quantity">Quantity: ${item.quantity}</p>
             <p class="item-description">${item.product.description}</p>
           </div>
