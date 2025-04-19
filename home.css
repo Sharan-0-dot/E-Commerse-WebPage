@@ -302,11 +302,17 @@ body {
 }
 
 .product h3 {
-    font-size: 18px;
-    margin: 8px 0 4px;
-    height: 40px;
-    overflow: hidden;
+  font-size: 18px;
+  margin: 8px 0 4px;
+  height: auto;
+  line-height: 1.2;
+  max-height: 2.4em;
+  overflow: hidden;
+  display: -webkit-box;
+  color: #888;
+  -webkit-box-orient: vertical;
 }
+
 
 .product .product-id {
     font-size: 11px;
